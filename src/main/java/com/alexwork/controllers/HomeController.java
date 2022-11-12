@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/")
 public class HomeController {
 
-    @GetMapping("start")
+    @GetMapping("home")
     public String home(Model model) {
         model.addAttribute("title", "Main page");
         return "index";
