@@ -1,10 +1,7 @@
 package com.alexwork.controllers;
 
-
 import com.alexwork.persistance.dto.AuthorDto;
 import com.alexwork.persistance.dto.BookDto;
-
-import com.alexwork.persistance.model.Author;
 import com.alexwork.persistance.model.Book;
 import com.alexwork.services.AuthorService;
 import com.alexwork.services.BookService;
@@ -20,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/books")
 public class BookController {
+
     @Autowired
     private BookService bService;
     @Autowired
@@ -28,13 +26,14 @@ public class BookController {
 
     @GetMapping
     public ModelAndView home(@RequestParam(required = false) String sort, @RequestParam(required = false) String by) {
-        logger.info(sort);
-        logger.info(by);
+
+        logger.info("method home(books) was started");
         ModelAndView modelAndView = new ModelAndView("books");
         List<BookDto> listBook = bService.getAll(sort, by);
         modelAndView.addObject("listBook", listBook);
         modelAndView.addObject("sort", sort);
         modelAndView.addObject("by", by);
+
         return modelAndView;
     }
 
@@ -49,11 +48,13 @@ public class BookController {
             logger.warn("Requested book with id='{}' is not exist", id, e);
             modelAndView = new ModelAndView("redirect:/book");
         }
+
         return modelAndView;
     }
 
     @PostMapping(value = "/add/{id}", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ModelAndView addBook(BookDto book, @PathVariable Long id) {
+
         ModelAndView model;
         try {
             book = bService.save(book);
@@ -64,20 +65,24 @@ public class BookController {
         } catch (Exception e) {
             logger.warn("Created book {} is not successful", book, e);
         }
+
         return new ModelAndView("redirect:/books");
     }
 
     @GetMapping("/page/{id}")
     public ModelAndView page(@PathVariable Long id) {
+
         ModelAndView model = new ModelAndView("create_book");
         BookDto bookDto = new BookDto();
         model.addObject("author_id", id);
         model.addObject("book", bookDto);
+
         return model;
     }
 
     @GetMapping("/page/{id}/{bookId}")
     public ModelAndView page(@PathVariable Long id, @PathVariable(required = false) Long bookId) {
+
         ModelAndView model = new ModelAndView("create_book");
         BookDto bookDto = new BookDto();
         if (bookId != null) {
@@ -85,11 +90,13 @@ public class BookController {
         }
         model.addObject("author_id", id);
         model.addObject("book", bookDto);
+
         return model;
     }
 
     @PostMapping("/update")
     public ModelAndView updateBook(@RequestBody Book book) {
+
         ModelAndView model;
         try {
             BookDto bookDto = bService.update(book);
@@ -99,6 +106,7 @@ public class BookController {
             logger.warn("Update book {} is not successful", book, e);
             model = new ModelAndView("redirect:/authors");
         }
+
         return model;
     }
 
@@ -107,6 +115,7 @@ public class BookController {
 
         bService.delete(id);
         logger.warn("Delete book id = {}", id);
+
         return new ModelAndView("redirect:/books");
     }
 
