@@ -9,77 +9,76 @@
     <title>Online library</title>
 </head>
 <body>
-<div class="wrapper">
-    <div class="hi">
-        <div class="container">
-            <div class="hi__row">
-                <div class="hi__body">
-                    <div class="hi_title">Это список книг</div>
-                    <a href="/home" class="vertical__btm">Назад</a>
+ <div class="wrapper">
+            <div class="hi">
+                <div class="container">
+                    <div class="hi__row">
+                        <div class="hi__body">
+                            <div class="hi_title">Это список книг</div>
+                            <a href="/home" class="vertical__btm">Назад</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="what">
+            <div class="container">
+                <div class="what__row">
+                    <div class="what__checkbox">
+                        </div>
+                          <div class="what__table">
+                            <table>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>
+                                        <a th:if="${sort=='asc'}" th:href="@{/books(sort='desc',by='Title')}">Title</a>
+                                        <a th:unless="${sort=='asc'}" th:href="@{/books(sort='asc',by='Title')}">Title</a>
+                                    </th>
+                                    <th>
+                                        <a th:if="${sort=='asc'}" th:href="@{/books(sort='desc',by='Publication')}">Publication</a>
+                                        <a th:unless="${sort=='asc'}" th:href="@{/books(sort='asc',by='Publication')}">Publication</a>
+                                    </th>
+                                    <th>
+                                        <a th:if="${sort=='asc'}" th:href="@{/books(sort='desc',by='Type')}">Type</a>
+                                        <a th:unless="${sort=='asc'}" th:href="@{/books(sort='asc',by='Type')}">Type</a>
+                                    </th>
+                                    <th>
+                                        <a th:if="${sort=='asc'}" th:href="@{/books(sort='desc',by='Author_Surname')}">Author</a>
+                                        <a th:unless="${sort=='asc'}" th:href="@{/books(sort='asc',by='Author_Surname')}">Author</a>
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr th:each="book : ${listBook}">
+                                    <td th:utext="${book.id}">...</td>
+                                    <td th:utext="${book.title}">...</td>
+                                    <td th:utext="${book.publication}">...</td>
+                                    <td th:utext="${book.type}">...</td>
+                                    <td>
+                                        <span th:if="${book.author}" th:utext="${book.author.name} + ${book.author.surname}"></span>
+                                        <span th:unless="${book.author}" >Я еще молодой автор(неизвестный)</span>
+                                    </td>
+                                    <td>
+                                        <a th:href="'/books/del/'+${book.id}"
+                                           onclick="return confirm('Are you ok?')">X</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="'/books/page/'+${book.author.id}+'/'+${book.id} "> Change</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="what">
-        <div class="container">
-            <div class="what__row">
-                <div class="what__checkbox">
-
-                </div>
-                  <div class="what__table">
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>
-                                <a th:if="${sort=='asc'}" th:href="@{/books(sort='desc',by='Title')}">Title</a>
-                                <a th:unless="${sort=='asc'}" th:href="@{/books(sort='asc',by='Title')}">Title</a>
-                            </th>
-                            <th>
-                                <a th:if="${sort=='asc'}" th:href="@{/books(sort='desc',by='Publication')}">Publication</a>
-                                <a th:unless="${sort=='asc'}" th:href="@{/books(sort='asc',by='Publication')}">Publication</a>
-                            </th>
-                            <th>
-                                <a th:if="${sort=='asc'}" th:href="@{/books(sort='desc',by='Type')}">Type</a>
-                                <a th:unless="${sort=='asc'}" th:href="@{/books(sort='asc',by='Type')}">Type</a>
-                            </th>
-                            <th>
-                                <a th:if="${sort=='asc'}" th:href="@{/books(sort='desc',by='Author_Surname')}">Author</a>
-                                <a th:unless="${sort=='asc'}" th:href="@{/books(sort='asc',by='Author_Surname')}">Author</a>
-                            </th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        <tr th:each="book : ${listBook}">
-                            <td th:utext="${book.id}">...</td>
-                            <td th:utext="${book.title}">...</td>
-                            <td th:utext="${book.publication}">...</td>
-                            <td th:utext="${book.type}">...</td>
-                            <td>
-                                <span th:if="${book.author}" th:utext="${book.author.name} + ${book.author.surname}"></span>
-                                <span th:unless="${book.author}" >Я еще молодой автор(неизвестный)</span>
-                            </td>
-                            <td>
-                                <a th:href="'/books/del/'+${book.id}"
-                                   onclick="return confirm('Are you ok?')">X</a>
-                            </td>
-                            <td>
-                                <a th:href="'/books/page/'+${book.author.id}+'/'+${book.id} "> Change</a>
-                            </td>
-                        </tr>
-                    </table>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__row">
+                    <div class="footer__text">
+                        Алексей Верезубов 2022
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__row">
-                <div class="footer__text">
-                    Алексей Верезубов 2022
-                </div>
-            </div>
-        </div>
-    </footer>
+        </footer>
 </div>
 </body>
 </html>

@@ -164,7 +164,7 @@ body {
 }
 
 .what {
-    padding: 50px 0 0 50px;
+    padding: 50px;
     flex: 1 1 auto;
 }
 
@@ -360,7 +360,7 @@ tr td:last-child {
 }
 
 .vertical {
-    padding: 50px 0;
+    /*padding: 50px 0;*/
 }
 
 .vertical__title {
@@ -458,7 +458,7 @@ tr td:last-child {
 
 .footer {
     margin-top: 20px;
-    background-color: #f5f5f5;
+    background-color: #9198bd;
 }
 
 .footer__row {
@@ -475,7 +475,7 @@ tr td:last-child {
 }
 
 .footer__text {
-    color: #445162;
+    color: #05102d;
     font-size: 12px;
     letter-spacing: 0.3px;
 }
