@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
-    <title>FLEXBOX</title>
+    <title>Online library</title>
  </head>
  <body>
             <div class="wrapper">
@@ -51,7 +51,10 @@
                                 <td th:utext="${author.id}">...</td>
                                 <td th:utext="${author.name}">...</td>
                                 <td th:utext="${author.surname}">...</td>
-                                <td th:utext="${author.book.title}">...</td>
+                                <td>
+                                    <span th:if="${author.book}" th:utext="${author.book.title}"></span>
+                                    <span th:unless="${author.book}" > Нету вдохновения</span>
+                                </td>
                                 <td >
                                     <a th:href="'/authors/del/'+${author.id}"
                                     onclick="return confirm('Are you ok?')">X</a>

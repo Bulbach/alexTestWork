@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
-    <title>FLEXBOX</title>
+    <title>Online library</title>
 </head>
 <body>
 <div class="wrapper">
@@ -25,18 +25,18 @@
             <div class="what__row">
 
                 <div class="what__form">
-                    <form th:action="'/books/add/'+ ${author_id} "
+                    <form th:action="'/books/add/'+ ${author_id}"
                           th:object="${book}" method="POST">
                         Title:
-                        <input type="text" name="title" th:value="*{title}" />
+                        <input type="text" required name="title" th:value="*{title}" />
                         <br/>
                         Publication:
-                        <input type="date" name="publication" pattern="yyyy-MM-dd" th:value="*{publication}" />
+                        <input type="date" required name="publication" pattern="yyyy-MM-dd" th:value="*{publication}" />
                         <br/>
                         Type:
                         <div>
                             <input type="radio" id="bookType1"
-                                   name="type" value="BOOK">
+                                  checked name="type" value="BOOK">
                             <label for="bookType1">BOOK</label>
 
                             <input type="radio" id="bookType2"

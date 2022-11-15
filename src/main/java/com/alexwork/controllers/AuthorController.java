@@ -49,7 +49,7 @@ public class AuthorController {
     }
 
     @PostMapping(value = "/add", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public ModelAndView addAuthor(AuthorDto author) {
+    public ModelAndView addAuthor(AuthorDto author, @PathVariable(required = false) Long id){
 
         ModelAndView model;
         AuthorDto authorDto = new AuthorDto();
