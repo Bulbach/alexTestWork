@@ -43,7 +43,7 @@ public class BookService {
     private Sort getSort(String order, String by) {
         Sort orders;
         if (StringUtils.hasText(order) && StringUtils.hasText(by)) {
-            orders = Sort.by("BookTitle");
+            orders = Sort.by(by);
             switch (order) {
                 case "asc":
                     orders = orders.ascending();
@@ -84,6 +84,7 @@ public class BookService {
 
     public void delete(Long id) {
         bookRepo.deleteById(id);
+
     }
 
 

@@ -33,6 +33,8 @@ public class BookController {
         ModelAndView modelAndView = new ModelAndView("books");
         List<BookDto> listBook = bService.getAll(sort, by);
         modelAndView.addObject("listBook", listBook);
+        modelAndView.addObject("sort", sort);
+        modelAndView.addObject("by", by);
         return modelAndView;
     }
 
@@ -68,8 +70,21 @@ public class BookController {
     @GetMapping("/page/{id}")
     public ModelAndView page(@PathVariable Long id) {
         ModelAndView model = new ModelAndView("create_book");
+        BookDto bookDto = new BookDto();
         model.addObject("author_id", id);
-        model.addObject("book", new BookDto());
+        model.addObject("book", bookDto);
+        return model;
+    }
+
+    @GetMapping("/page/{id}/{bookId}")
+    public ModelAndView page(@PathVariable Long id, @PathVariable(required = false) Long bookId) {
+        ModelAndView model = new ModelAndView("create_book");
+        BookDto bookDto = new BookDto();
+        if (bookId != null) {
+            bookDto = bService.getById(bookId);
+        }
+        model.addObject("author_id", id);
+        model.addObject("book", bookDto);
         return model;
     }
 
@@ -87,7 +102,7 @@ public class BookController {
         return model;
     }
 
-    @DeleteMapping("/del/{id}")
+    @GetMapping("/del/{id}")
     public ModelAndView deleteBook(@PathVariable Long id) {
 
         bService.delete(id);

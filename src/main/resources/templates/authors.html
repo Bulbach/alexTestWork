@@ -45,6 +45,7 @@
                                     <a th:unless="${sort=='asc'}" th:href="@{/authors(sort='asc',by='BookTitle')}">Book</a>
                                 </th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             <tr th:each="author : ${listAuthor}">
                                 <td th:utext="${author.id}">...</td>
@@ -54,6 +55,9 @@
                                 <td >
                                     <a th:href="'/authors/del/'+${author.id}"
                                     onclick="return confirm('Are you ok?')">X</a>
+                                </td>
+                                <td>
+                                    <a th:href="'/authors/page/'+ ${author.id}"> Change</a>
                                 </td>
                             </tr>
                         </table>

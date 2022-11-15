@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/authors" )
+@RequestMapping(value = "/authors")
 public class AuthorController {
     @Autowired
     private AuthorService service;
@@ -45,23 +45,58 @@ public class AuthorController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/add" , consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public ModelAndView addAuthor( AuthorDto author) {
+    @PostMapping(value = "/add", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public ModelAndView addAuthor(AuthorDto author) {
+        ModelAndView model;
         AuthorDto authorDto = new AuthorDto();
+        boolean isAdd = author.getId() == null;
         try {
-           authorDto = service.save(author);
+            authorDto = service.save(author);
         } catch (Exception e) {
             logger.warn("Created author {} is not successful", author, e);
         }
-        return new ModelAndView("redirect:/authors/" + authorDto.getId());
-    }
+        if (isAdd) {
+            model = new ModelAndView("redirect:/authors/" + authorDto.getId());
 
-    @GetMapping("/page")
-    public ModelAndView page() {
-        ModelAndView model = new ModelAndView("create_author");
-        model.addObject("author", new AuthorDto());
+        } else {
+            model = new ModelAndView("redirect:/authors");
+        }
         return model;
     }
+
+    @GetMapping("/page/{id}")
+    public ModelAndView page(@PathVariable(required = false) Long id) {
+        ModelAndView model = new ModelAndView("create_author");
+        AuthorDto authorDto = new AuthorDto();
+        if (id != null) {
+            authorDto = service.getDtoById(id);
+        }
+        model.addObject("author", authorDto);
+
+        return model;
+    }
+    @GetMapping("/page")
+    public ModelAndView page(){
+        ModelAndView model = new ModelAndView("create_author");
+        AuthorDto authorDto = new AuthorDto();
+
+        model.addObject("author", authorDto);
+
+        return model;
+    }
+    /*
+        @GetMapping("/page/{id}/{bookId}")
+    public ModelAndView page(@PathVariable Long id, @PathVariable(required = false) Long bookId) {
+        ModelAndView model = new ModelAndView("create_book");
+        BookDto bookDto = new BookDto();
+        if (bookId!=null){
+            bookDto = bService.getById(bookId);
+        }
+        model.addObject("author_id", id);
+        model.addObject("book", bookDto);
+        return model;
+    }
+     */
 
     @PostMapping("/update")
     public ModelAndView updateAuthor(@RequestBody Author author) {

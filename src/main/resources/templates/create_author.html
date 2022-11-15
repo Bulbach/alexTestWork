@@ -25,13 +25,14 @@
             <div class="what__row">
                 <div class="what__form">
                     <form th:action="@{/authors/add}"
-                           method="POST">
+                          th:object="${author}" method="POST">
                         Name:
-                        <input type="text" name="name" />
-                        <br/>
+                        <input type="text" name="name" th:value="*{name}" />
+
                         Surname:
-                        <input type="text" name="surname" />
-                        <br/>
+                        <input type="text" name="surname" th:value="*{surname}" />
+
+                        <input type="hidden" name="id" th:value="*{id}" />
                         <input type="submit" value="Create" />
                     </form>
                 </div>

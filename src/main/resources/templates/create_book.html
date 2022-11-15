@@ -26,12 +26,12 @@
 
                 <div class="what__form">
                     <form th:action="'/books/add/'+ ${author_id} "
-                          method="POST">
+                          th:object="${book}" method="POST">
                         Title:
-                        <input type="text" name="title" />
+                        <input type="text" name="title" th:value="*{title}" />
                         <br/>
                         Publication:
-                        <input type="date" name="publication" pattern="yyyy-MM-dd" />
+                        <input type="date" name="publication" pattern="yyyy-MM-dd" th:value="*{publication}" />
                         <br/>
                         Type:
                         <div>
@@ -47,6 +47,7 @@
                                    name="type" value="NEWSPAPER">
                             <label for="bookType3">NEWSPAPER</label>
                         </div>
+                        <input type="hidden" name="id" th:value="*{id}" />
                         <input type="submit" value="Create" />
                     </form>
                 </div>
