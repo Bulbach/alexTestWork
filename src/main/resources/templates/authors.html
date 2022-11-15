@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>FLEXBOX</title>
+ </head>
+ <body>
+            <div class="wrapper">
+                <div class="hi">
+                    <div class="container">
+                        <div class="hi__row">
+                            <div class="hi__body">
+                            <div class="hi_title">Это список авторов</div>
+                                <a href="/home" class="vertical__btm">Назад</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="what">
+                <div class="container">
+                    <div class="what__row_column">
+                        <div class="what__btm">
+                            <a href="/authors/page" class="vertical__btm">Add Author</a>
+                        </div>
+
+                    <div class="what__table">
+                        <div>
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>
+                                    <a th:if="${sort=='asc'}" th:href="@{/authors(sort='desc',by='Name')}">Name</a>
+                                    <a th:unless="${sort=='asc'}" th:href="@{/authors(sort='asc',by='Name')}">Name</a>
+                                </th>
+                                <th>
+                                    <a th:if="${sort=='asc'}" th:href="@{/authors(sort='desc',by='Surname')}">Surname</a>
+                                    <a th:unless="${sort=='asc'}" th:href="@{/authors(sort='asc',by='Surname')}">Surname</a>
+                                </th>
+                                <th>
+                                    <a th:if="${sort=='asc'}" th:href="@{/authors(sort='desc',by='BookTitle')}">Book</a>
+                                    <a th:unless="${sort=='asc'}" th:href="@{/authors(sort='asc',by='BookTitle')}">Book</a>
+                                </th>
+                                <th></th>
+                            </tr>
+                            <tr th:each="author : ${listAuthor}">
+                                <td th:utext="${author.id}">...</td>
+                                <td th:utext="${author.name}">...</td>
+                                <td th:utext="${author.surname}">...</td>
+                                <td th:utext="${author.book.title}">...</td>
+                                <td >
+                                    <a th:href="'/authors/del/'+${author.id}"
+                                    onclick="return confirm('Are you ok?')">X</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer__row">
+                    <div class="footer__text">
+                        Алексей Верезубов 2022
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+ </body>
+</html>

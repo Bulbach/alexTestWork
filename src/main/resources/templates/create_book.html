@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>FLEXBOX</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="hi">
+        <div class="container">
+            <div class="hi__row">
+                <div class="hi__body">
+                    <div class="hi_title">Создайте книгу)</div>
+                    <a href="/home" class="vertical__btm">Назад</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="what">
+        <div class="container">
+            <div class="what__row">
+
+                <div class="what__form">
+                    <form th:action="'/books/add/'+ ${author_id} "
+                          method="POST">
+                        Title:
+                        <input type="text" name="title" />
+                        <br/>
+                        Publication:
+                        <input type="date" name="publication" pattern="yyyy-MM-dd" />
+                        <br/>
+                        Type:
+                        <div>
+                            <input type="radio" id="bookType1"
+                                   name="type" value="BOOK">
+                            <label for="bookType1">BOOK</label>
+
+                            <input type="radio" id="bookType2"
+                                   name="type" value="MAGAZINE">
+                            <label for="bookType2">MAGAZINE</label>
+
+                            <input type="radio" id="bookType3"
+                                   name="type" value="NEWSPAPER">
+                            <label for="bookType3">NEWSPAPER</label>
+                        </div>
+                        <input type="submit" value="Create" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__row">
+                <div class="footer__text">
+                    Алексей Верезубов 2022
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

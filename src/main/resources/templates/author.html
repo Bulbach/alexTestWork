@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>FLEXBOX</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="hi">
+        <div class="container">
+            <div class="hi__row">
+                <div class="hi__body">
+                    <div class="hi_title">Создайте книгу</div>
+                    <a href="/home" class="vertical__btm">Назад</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="what">
+        <div class="container">
+            <div class="what__row_column">
+                <div class="what__button">
+                    <h1>Person List</h1>
+                    <a  th:href="'/books/page/'+${author.id}">Add Book</a>
+                </div>
+                <div class="what__table">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Book</th>
+                        </tr>
+
+                        <td th:utext="${author.id}">...</td>
+                        <td th:utext="${author.name}">...</td>
+                        <td th:utext="${author.surname}">...</td>
+                        <td th:text= "${author.book} ? ${author.book.title} : 'Is not exist'"/>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__row">
+                <div class="footer__text">
+                    Алексей Верезубов 2022
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

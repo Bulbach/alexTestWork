@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class BookDto {
     private Long id;
     private String title;
-    private LocalDate publication;
+    private String publication;
     private String type;
     private Author author;
 

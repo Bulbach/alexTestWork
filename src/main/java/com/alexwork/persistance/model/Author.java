@@ -25,7 +25,7 @@ public class Author {
     @Column(name = "surname")
     private String surname;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "books_id", referencedColumnName = "id")
     private Book book;
 }

@@ -32,7 +32,7 @@ public class Book {
     @Enumerated(EnumType.STRING)
     private typeOfBook type;
 
-    @OneToOne(mappedBy = "book")
+    @OneToOne(mappedBy = "book",fetch = FetchType.LAZY)
     private Author author;
 
     public enum typeOfBook{
